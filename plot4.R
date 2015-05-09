@@ -1,0 +1,45 @@
+if (!file.exists("household_power_consumption.txt")) {
+    stop("Please place the unzipped data file [household_power_consumption.txt] in the working directory.")
+}
+
+# reading the data file into a data frame
+datafile <- "household_power_consumption.txt"
+DT <- read.table(datafile, header = TRUE, sep = ";", 
+                 na.strings = "?") # missing values are coded as '?'
+
+# converting data types for easier handling
+DT$Time <- strptime(paste(DT$Date, DT$Time, sep = " "), "%d/%m/%Y %H:%M:%S")
+DT$Date <- as.Date(DT$Date, "%d/%m/%Y")
+
+
+# subsetting data
+DT2Days <- subset(DT, DT$Date > as.Date("2007-01-31") & DT$Date < as.Date("2007-02-03"))
+
+# setting global parameters
+par(mfrow = c(2,2), cex = 0.8)
+
+# plotting line graph for Global Active Power
+plot(DT2Days$Time ,DT2Days$Global_active_power, type = "l", 
+     xlab = NA, ylab = "Global Active Power (kilowatts)")
+
+# plotting line graph for voltage
+plot(DT2Days$Time ,DT2Days$Voltage, type = "l", xlab = "datetime", ylab = "Voltage")
+
+# plotting three sub meter graphs
+plot(DT2Days$Time ,DT2Days$Sub_metering_1, col = "black", 
+     type = "l", xlab = NA, ylab = "Energy sub metering")
+lines(DT2Days$Time ,DT2Days$Sub_metering_2, col = "red", type = "l")
+lines(DT2Days$Time ,DT2Days$Sub_metering_3, col = "blue", type = "l")
+
+# adding legend to the sub metering graphs
+legend("topright", col = c("black", "red", "blue"), cex = 0.6,
+       lwd = 2.5, lty = c(1,1), bty = "n", 
+       legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+
+# plotting graph for global reactive power
+plot(DT2Days$Time ,DT2Days$Global_reactive_power, type = "l", 
+     xlab = "datetime", ylab = "Global_reactive_power")
+
+# copying plot to PNG file
+dev.copy(png, file = "plot4.png")
+dev.off()
