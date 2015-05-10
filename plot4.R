@@ -20,7 +20,7 @@ par(mfrow = c(2,2), cex = 0.8)
 
 # plotting line graph for Global Active Power
 plot(DT2Days$Time ,DT2Days$Global_active_power, type = "l", 
-     xlab = NA, ylab = "Global Active Power (kilowatts)")
+     xlab = NA, ylab = "Global Active Power")
 
 # plotting line graph for voltage
 plot(DT2Days$Time ,DT2Days$Voltage, type = "l", xlab = "datetime", ylab = "Voltage")
