@@ -41,5 +41,5 @@ plot(DT2Days$Time ,DT2Days$Global_reactive_power, type = "l",
      xlab = "datetime", ylab = "Global_reactive_power")
 
 # copying plot to PNG file
-dev.copy(png, file = "plot4.png")
+dev.copy(png, file = "plot4.png", width=480, height=480)
 dev.off()

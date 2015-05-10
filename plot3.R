@@ -27,5 +27,5 @@ lines(DT2Days$Time ,DT2Days$Sub_metering_3, col = "blue", type = "l")
 legend("topright", col = c("black", "red", "blue"), lwd = 2.5, lty = c(1,1), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
 
 # copying plot to PNG file
-dev.copy(png, file = "plot3.png")
+dev.copy(png, file = "plot3.png", width=480, height=480)
 dev.off()

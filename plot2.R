@@ -23,5 +23,5 @@ plot(DT2Days$Time ,DT2Days$Global_active_power, type = "l",
      xlab = NA, ylab = "Global Active Power (kilowatts)")
 
 # copying plot to PNG file
-dev.copy(png, file = "plot2.png")
+dev.copy(png, file = "plot2.png", width=480, height=480)
 dev.off()
